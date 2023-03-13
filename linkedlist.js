@@ -7,10 +7,11 @@ function Node(data = null, nextNodeAddress = null) {
 
 function LinkedList() {
   const head = new Node('head');
+  let length = 0;
   let lastNode;
 
   // append
-  const append = function (value) {
+  const append = (value) => {
     const newNode = new Node(value);
     // if list is empty head should point to newNode
     if (head.nextNode === null) {
@@ -21,19 +22,24 @@ function LinkedList() {
       lastNode.nextNode = newNode;
       lastNode = newNode;
     }
+    length += 1;
   };
 
   // prepend
-  const prepend = function (value) {
+  const prepend = (value) => {
     const newNode = new Node(value, head.nextNode);
     if (head.nextNode === null) {
       lastNode = newNode;
     }
     head.nextNode = newNode;
+    length += 1;
   };
+
   // size
-  // head
+  const size = () => length;
+
   // tail
+  const tail = () => lastNode;
   // at(index)
   // pop
   // contains(value)
@@ -42,11 +48,11 @@ function LinkedList() {
   // insertAt(value, index)
   // removeAt(index)
   return {
-    head, lastNode, append, prepend,
+    head, lastNode, append, prepend, size, tail,
   };
 }
 
 const list = LinkedList();
 list.append('shulamite');
 list.append('esther');
-console.log(list.head, list.lastNode);
+console.log(list.tail());

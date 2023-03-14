@@ -18,12 +18,12 @@ function LinkedList() {
     if (head.nextNode === null) {
       head.nextNode = newNode;
       lastNode = newNode;
-    }
-    if (head.nextNode !== null) {
+    } else if (head.nextNode !== null) {
       lastNode.nextNode = newNode;
       lastNode = newNode;
     }
     length += 1;
+    console.log(length);
   };
 
   // prepend
@@ -53,7 +53,32 @@ function LinkedList() {
     const next = node.nextNode;
     return getNode(index, next);
   };
+
   // pop
+  /*
+  const pop = () => {
+    if (head.nextNode === null) {
+      return 'List is empty';
+    }
+    function removeLast(node) {
+      // for only one element
+      console.log(node.nextNode);
+      if (node.nextNode === null && length === 1) {
+        head.nextNode = null;
+        length -= 1;
+        return;
+      }
+      if (node.nextNode.nextNode === null && length > 1) {
+        node.nextNode = null;
+        length -= 1;
+      }
+      // const next = ;
+      // removeLast(next);
+    }
+    removeLast();
+  };
+  */
+
   // contains(value)
   // find(value)
   // toString()
@@ -65,6 +90,6 @@ function LinkedList() {
 }
 
 const list = LinkedList();
-list.append('shulamite');
-list.append('claudia');
-console.log(list.at(-41));
+list.apppend('shulamite');
+list.apppend('claudia');
+console.log(list);

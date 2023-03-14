@@ -1,8 +1,9 @@
-function Node(data = null, nextNodeAddress = null) {
+function Node(data = null, nextNodeAddress = null, id) {
   const value = data;
   const nextNode = nextNodeAddress;
+  const index = id;
 
-  return { value, nextNode };
+  return { value, nextNode, index };
 }
 
 function LinkedList() {
@@ -12,7 +13,7 @@ function LinkedList() {
 
   // append
   const append = (value) => {
-    const newNode = new Node(value);
+    const newNode = new Node(value, null, length);
     // if list is empty head should point to newNode
     if (head.nextNode === null) {
       head.nextNode = newNode;
@@ -27,7 +28,7 @@ function LinkedList() {
 
   // prepend
   const prepend = (value) => {
-    const newNode = new Node(value, head.nextNode);
+    const newNode = new Node(value, head.nextNode, length);
     if (head.nextNode === null) {
       lastNode = newNode;
     }
@@ -40,7 +41,18 @@ function LinkedList() {
 
   // tail
   const tail = () => lastNode;
-  // at(index)
+
+  // return node at given index at(index)
+  const at = function getNode(index, node = head.nextNode) {
+    if (node === null) {
+      return "Couldn't find node";
+    }
+    if (node.index === index) {
+      return node;
+    }
+    const next = node.nextNode;
+    return getNode(index, next);
+  };
   // pop
   // contains(value)
   // find(value)
@@ -48,11 +60,11 @@ function LinkedList() {
   // insertAt(value, index)
   // removeAt(index)
   return {
-    head, lastNode, append, prepend, size, tail,
+    head, lastNode, append, prepend, size, tail, at,
   };
 }
 
 const list = LinkedList();
 list.append('shulamite');
-list.append('esther');
-console.log(list.tail());
+list.append('claudia');
+console.log(list.at(-41));

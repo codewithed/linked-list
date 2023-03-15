@@ -28,7 +28,7 @@ function LinkedList() {
 
   // prepend
   const prepend = (value) => {
-    const newNode = new Node(value, head.nextNode, length);
+    const newNode = new Node(value, head.nextNode, 0);
     if (head.nextNode === null) {
       lastNode = newNode;
     }
@@ -36,10 +36,8 @@ function LinkedList() {
     length += 1;
   };
 
-  // size
   const size = () => length;
 
-  // tail
   const tail = () => lastNode;
 
   // return node at given index at(index)
@@ -55,41 +53,46 @@ function LinkedList() {
   };
 
   // pop
-  /*
-  const pop = () => {
-    if (head.nextNode === null) {
-      return 'List is empty';
-    }
+  const pop = (node) => {
     function removeLast(node) {
-      // for only one element
-      console.log(node.nextNode);
-      if (node.nextNode === null && length === 1) {
-        head.nextNode = null;
+      if (head.nextNode === null) {
+        return 'List is empty';
+      }
+      if (node.index === length - 2) {
+        node.nextNode = null;
         length -= 1;
         return;
       }
-      if (node.nextNode.nextNode === null && length > 1) {
-        node.nextNode = null;
-        length -= 1;
-      }
-      // const next = ;
-      // removeLast(next);
+      const child = node.nextNode;
+      removeLast(child);
     }
-    removeLast();
+    removeLast(head);
   };
-  */
 
   // contains(value)
+  const contains = (value) => {
+    function checkForVal(node, value) {
+      if (node.data !== value && node.nextNode === null) {
+        return false;
+      }
+      if (node.data === value) {
+        return true;
+      }
+      checkForVal(node.nextNode, value);
+    }
+    return checkForVal(head.nextNode);
+  };
   // find(value)
   // toString()
   // insertAt(value, index)
   // removeAt(index)
   return {
-    head, lastNode, append, prepend, size, tail, at,
+    head, lastNode, append, prepend, size, tail, at, pop, contains,
   };
 }
 
 const list = LinkedList();
-list.apppend('shulamite');
-list.apppend('claudia');
-console.log(list);
+list.append('shulamite');
+list.append('shu');
+console.log(list.contains('shu'));
+console.log(list.head);

@@ -97,13 +97,31 @@ function LinkedList() {
   };
 
   // toString() represents your LinkedList objects as strings
+  function toString() {
+    let str = '';
+    function addToString(node = head.nextNode) {
+      if (node === null) {
+        str += '-> null';
+        return;
+      }
+      if (node === head.nextNode) {
+        str += `(${node.value})`;
+      } else {
+        str += ` -> (${node.value}) `;
+      }
+      addToString(node.nextNode);
+    }
+
+    addToString();
+    console.log(str);
+  }
 
   return {
-    head, lastNode, append, prepend, size, tail, at, pop, contains, find,
+    head, lastNode, append, prepend, size, tail, at, pop, contains, find, toString,
   };
 }
 
 const list = LinkedList();
 list.append('shulamite');
 list.append('shu');
-console.log(list.head);
+list.toString();

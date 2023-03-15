@@ -72,15 +72,15 @@ function LinkedList() {
   // contains(value)
   const contains = (value) => {
     function checkForVal(node, value) {
-      if (node.data !== value && node.nextNode === null) {
+      if (node.value !== value && node.nextNode === null) {
         return false;
       }
-      if (node.data === value) {
+      if (node.value === value) {
         return true;
       }
-      checkForVal(node.nextNode, value);
+      return checkForVal(node.nextNode, value);
     }
-    return checkForVal(head.nextNode);
+    return checkForVal(head.nextNode, value);
   };
   // find(value)
   // toString()

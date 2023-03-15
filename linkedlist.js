@@ -1,4 +1,4 @@
-function Node(data = null, nextNodeAddress = null, id) {
+function Node(id, data = null, nextNodeAddress = null) {
   const value = data;
   const nextNode = nextNodeAddress;
   const index = id;
@@ -13,7 +13,7 @@ function LinkedList() {
 
   // append
   const append = (value) => {
-    const newNode = new Node(value, null, length);
+    const newNode = new Node(length, value);
     // if list is empty head should point to newNode
     if (head.nextNode === null) {
       head.nextNode = newNode;
@@ -23,12 +23,11 @@ function LinkedList() {
       lastNode = newNode;
     }
     length += 1;
-    console.log(length);
   };
 
   // prepend
   const prepend = (value) => {
-    const newNode = new Node(value, head.nextNode, 0);
+    const newNode = new Node(0, value, head.nextNode);
     if (head.nextNode === null) {
       lastNode = newNode;
     }
@@ -64,9 +63,9 @@ function LinkedList() {
         return;
       }
       const child = node.nextNode;
-      removeLast(child);
+      return removeLast(child);
     }
-    removeLast(head);
+    return removeLast(head);
   };
 
   // contains(value)
@@ -82,17 +81,29 @@ function LinkedList() {
     }
     return checkForVal(head.nextNode, value);
   };
+
   // find(value)
-  // toString()
-  // insertAt(value, index)
-  // removeAt(index)
+  const find = (value) => {
+    function checkForVal(node, value) {
+      if (node.value !== value && node.nextNode === null) {
+        return null;
+      }
+      if (node.value === value) {
+        return node.index;
+      }
+      return checkForVal(node.nextNode, value);
+    }
+    return checkForVal(head.nextNode, value);
+  };
+
+  // toString() represents your LinkedList objects as strings
+
   return {
-    head, lastNode, append, prepend, size, tail, at, pop, contains,
+    head, lastNode, append, prepend, size, tail, at, pop, contains, find,
   };
 }
 
 const list = LinkedList();
 list.append('shulamite');
 list.append('shu');
-console.log(list.contains('shu'));
 console.log(list.head);

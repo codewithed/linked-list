@@ -129,10 +129,3 @@ function LinkedList() {
     head, lastNode, append, prepend, size, tail, at, pop, contains, find, toString,
   };
 }
-
-const list = LinkedList();
-
-list.prepend('claudia');
-list.prepend('shu');
-list.prepend('shulamite');
-console.log(list.at(2));
